@@ -6,6 +6,54 @@ import (
 	"time"
 )
 
+func TestGetAbbrWeekdayName(t *testing.T) {
+	var cases = []struct {
+		weekday time.Weekday
+		weekdayName string
+	}{
+		{time.Monday, "Mon"},
+		{time.Tuesday, "Tue"},
+		{time.Wednesday, "Wed"},
+		{time.Thursday, "Thu"},
+		{time.Friday, "Fri"},
+		{time.Saturday, "Sat"},
+		{time.Sunday, "Sun"},
+	}
+	for _, c := range cases {
+		t.Run(fmt.Sprintf("%s", c.weekday), func(t *testing.T) {
+			in, _ := GetAbbrWeekdayName(c.weekday)
+			want := c.weekdayName
+			if in != want {
+				t.Errorf("got %s, want %s", in, want)
+			}
+		})
+	}
+}
+
+func TestGetAbbrWeekdayNameGerman(t *testing.T) {
+	var cases = []struct {
+		weekday time.Weekday
+		weekdayName string
+	}{
+		{time.Monday, "Mo"},
+		{time.Tuesday, "Di"},
+		{time.Wednesday, "Mi"},
+		{time.Thursday, "Do"},
+		{time.Friday, "Fr"},
+		{time.Saturday, "Sa"},
+		{time.Sunday, "So"},
+	}
+	for _, c := range cases {
+		t.Run(fmt.Sprintf("%s", c.weekday), func(t *testing.T) {
+			in, _ := GetAbbrWeekdayNameGerman(c.weekday)
+			want := c.weekdayName
+			if in != want {
+				t.Errorf("got %s, want %s", in, want)
+			}
+		})
+	}
+}
+
 func TestGetDateFirstOfMonth(t *testing.T) {
 	var cases = []struct {
 		year  int

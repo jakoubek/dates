@@ -1,6 +1,7 @@
 package dates
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -9,6 +10,52 @@ var (
 	dateFormat = "2006-01-02"
 	isoFormat  = "%04d-%02d-%02d"
 )
+
+func GetAbbrWeekdayName(weekday time.Weekday) (string, error) {
+	var abbrWeekday string
+	switch weekday {
+	case 0:
+		abbrWeekday = "Sun"
+	case 1:
+		abbrWeekday = "Mon"
+	case 2:
+		abbrWeekday = "Tue"
+	case 3:
+		abbrWeekday = "Wed"
+	case 4:
+		abbrWeekday = "Thu"
+	case 5:
+		abbrWeekday = "Fri"
+	case 6:
+		abbrWeekday = "Sat"
+	default:
+		return "", errors.New("No valid weekday given")
+	}
+	return abbrWeekday, nil
+}
+
+func GetAbbrWeekdayNameGerman(weekday time.Weekday) (string, error) {
+	var abbrWeekday string
+	switch weekday {
+	case 0:
+		abbrWeekday = "So"
+	case 1:
+		abbrWeekday = "Mo"
+	case 2:
+		abbrWeekday = "Di"
+	case 3:
+		abbrWeekday = "Mi"
+	case 4:
+		abbrWeekday = "Do"
+	case 5:
+		abbrWeekday = "Fr"
+	case 6:
+		abbrWeekday = "Sa"
+	default:
+		return "", errors.New("No valid weekday given")
+	}
+	return abbrWeekday, nil
+}
 
 // GetDateFirstOfMonth returns a time.Time object
 // For a given year and month (as ints) it calculates the
